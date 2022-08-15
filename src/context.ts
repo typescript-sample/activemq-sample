@@ -1,9 +1,9 @@
+import { ActiveMQChecker, Config, createSender, Subscriber } from 'activemq';
 import { HealthController } from 'health-service';
 import { ErrorHandler, Handler, RetryService, RetryWriter, StringMap } from 'mq-one';
 import { DB, PostgreSQLWriter } from 'pg-extension';
 import { Client } from 'stompit';
 import { Attributes, Validator } from 'xvalidators';
-import { ActiveMQChecker, Config, createSender, Subscriber } from './services/activemq';
 
 const retries = [5000, 10000, 20000];
 

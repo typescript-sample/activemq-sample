@@ -1,3 +1,4 @@
+import { ActiveMQConnection } from 'activemq';
 import { merge } from 'config-plus';
 import dotenv from 'dotenv';
 import http from 'http';
@@ -6,7 +7,6 @@ import { Pool } from 'pg';
 import { PoolManager } from 'pg-extension';
 import { config, env } from './config';
 import { createContext } from './context';
-import { ActiveMQConnection } from './services/activemq';
 
 dotenv.config();
 const conf = merge(config, process.env, env, process.env.ENV);

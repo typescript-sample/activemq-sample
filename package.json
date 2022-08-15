@@ -13,6 +13,7 @@
   "keywords": [],
   "author": "",
   "dependencies": {
+    "activemq": "^0.1.1",
     "amqplib": "^0.10.2",
     "config-plus": "^0.0.4",
     "dotenv": "^16.0.1",
