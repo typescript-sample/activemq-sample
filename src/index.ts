@@ -1,6 +1,7 @@
 import { ActiveMQConnection } from 'activemq';
 import { merge } from 'config-plus';
 import dotenv from 'dotenv';
+import express, { json } from 'express';
 import http from 'http';
 import { getBody } from 'logger-core';
 import { Pool } from 'pg';
@@ -8,13 +9,17 @@ import { PoolManager } from 'pg-extension';
 import { config, env } from './config';
 import { createContext } from './context';
 
-dotenv.config();
-const conf = merge(config, process.env, env, process.env.ENV);
+async function app() {
+  dotenv.config();
+  const conf = merge(config, process.env, env, process.env.ENV);
+  
+  const app = express();
+  app.use(json());
 
-const pool = new Pool(conf.db);
-const db = new PoolManager(pool);
-const amqConnection = new ActiveMQConnection(conf.amq);
-amqConnection.connect().then(client => {
+  const pool = new Pool(conf.db);
+  const db = new PoolManager(pool);
+  const amqConnection = new ActiveMQConnection(conf.amq);
+  const client = await amqConnection.connect();
   const ctx = createContext(db, client, conf.amq);
   ctx.read(ctx.handle);
 
@@ -38,4 +43,6 @@ amqConnection.connect().then(client => {
   }).listen(conf.port, () => {
     console.log('Start server at port ' + conf.port);
   });
-});
+}
+
+app();

@@ -17,6 +17,7 @@
     "amqplib": "^0.10.2",
     "config-plus": "^0.0.4",
     "dotenv": "^16.0.1",
+    "express": "^4.18.1",
     "health-service": "^0.1.2",
     "logger-core": "^0.3.0",
     "mq-one": "^0.1.6",
